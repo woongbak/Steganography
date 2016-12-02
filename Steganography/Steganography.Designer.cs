@@ -93,6 +93,7 @@
             this.imagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imagePictureBox.TabIndex = 4;
             this.imagePictureBox.TabStop = false;
+            this.imagePictureBox.Click += new System.EventHandler(this.imagePictureBox_Click);
             // 
             // menuStrip1
             // 
@@ -236,6 +237,7 @@
             this.Name = "Steganography";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Steganography";
+            this.Load += new System.EventHandler(this.Steganography_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
