@@ -1,0 +1,9 @@
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\bin\Debug\Steganography.exe.config
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\bin\Debug\Steganography.exe
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\bin\Debug\Steganography.pdb
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.csprojResolveAssemblyReference.cache
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.Steganography.resources
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.Properties.Resources.resources
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.csproj.GenerateResource.Cache
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.exe
+C:\Users\서현석\Desktop\task\opensource5\steganography\Steganography\obj\x86\Debug\Steganography.pdb
