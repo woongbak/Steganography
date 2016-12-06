@@ -53,7 +53,7 @@ namespace Steganography
                     {
                         if (pixelElementIndex % 8 == 0)
                         /**
-                         * 8 mean sizeof char (1 byte == 1 bit)
+                         * 8 mean sizeof char (1 byte == 8 bit)
                          * this is for checking that 1 character is finished or not
                          */
                         {
