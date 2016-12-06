@@ -42,8 +42,8 @@ namespace Steganography                                           //steganograph
                             if (state == State.Filling_With_Zeros && zeros == 8)//  state가 0으로 채워져있는상태고,zero변수가8이면
                             {
                                 if ((pixelElementIndex - 1) % 3 < 2)            //  pixelElement-1을 3으로 나눈 나머지가 2보다 작으면
-                                {
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));//  pixel값을 변경한다. 점찍기
+                                {                                               //  status가 문자열이끝났다고 하는데 픽셀에 G가 안채워졌을 경우
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));//  남은 pixel값을 0으로 변경한다.
                                 }
 
                                 return bmp;
@@ -51,7 +51,7 @@ namespace Steganography                                           //steganograph
 
                             if (charIndex >= text.Length)                       //  텍스트의길이보다 charindex가 길면(문자열을 다숨기면)
                             {
-                                state = State.Filling_With_Zeros;               //  state값을 변경한다.
+                                state = State.Filling_With_Zeros;               //  state값을 변경한다. 한글자를 다 쓴 상태
                             }
                             else
                             {
@@ -87,13 +87,13 @@ namespace Steganography                                           //steganograph
                                         charValue /= 2;
                                     }
 
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));//  변경한 값을 점으로 찍는다.
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));//  변경한 값을 픽셀값으로 저장.
                                 } break;
                         }
 
                         pixelElementIndex++;                                    //  pixelElementindex를 증가시킨다. R G B 순서로간다.
 
-                        if (state == State.Filling_With_Zeros)                  //  한 픽셀이 끝나면
+                        if (state == State.Filling_With_Zeros)                  //  한글자를 다 쓰면
                         {
                             zeros++;                                            //  zeros를 증가시킨다. 
                         }
@@ -122,29 +122,29 @@ namespace Steganography                                           //steganograph
                         {
                             case 0:
                                 {
-                                    charValue = charValue * 2 + pixel.R % 2; //픽셀의 R문자값을 정의 
+                                    charValue = charValue * 2 + pixel.R % 2; //픽셀의 R문자값을 추출
                                 } break;
                             case 1:
                                 {
-                                    charValue = charValue * 2 + pixel.G % 2; //픽셀의 G문자값을 정의 
+                                    charValue = charValue * 2 + pixel.G % 2; //픽셀의 G문자값을 추출 
                                 } break;
                             case 2:
                                 {
-                                    charValue = charValue * 2 + pixel.B % 2; //픽셀의 B문자값을 정의 
+                                    charValue = charValue * 2 + pixel.B % 2; //픽셀의 B문자값을 추출 
                                 } break;
                         }
 
                         colorUnitIndex++;                                   //다음 인덱스값으로 증가
 
-                        if (colorUnitIndex % 8 == 0)                        //colorindex가 픽셀의 처음값을 가르킬때
+                        if (colorUnitIndex % 8 == 0)                        //다음픽셀로 넘어갈 때
                         {
-                            charValue = reverseBits(charValue);             //ascii로 추출
+                            charValue = reverseBits(charValue);             //저장한 비트를 문자로 추출
 
-                            if (charValue == 0)                             //문자열이 없으면
+                            if (charValue == 0)                             //더 읽을 문자열이 없으면
                             {
-                                return extractedText;                       //추출된 텍스트를 리턴
+                                return extractedText;                       //추출된 문자열을 리턴
                             }
-                            char c = (char)charValue;                       //c는 ascii값을 char로 지정
+                            char c = (char)charValue;                       //c는 ascii값을 char로 변환한 변수
 
                             extractedText += c.ToString();                  //extractedText에 저장
                         }
@@ -155,15 +155,15 @@ namespace Steganography                                           //steganograph
             return extractedText;                                           //그림파일의 픽셀을 전부 읽으면 문자열을 리턴
         }
 
-        public static int reverseBits(int n)                                //한 픽셀에 숨어있는 문자열을 숫자로 추출
+        public static int reverseBits(int n)                                //추출된 비트를 더하는 함수
         {
-            int result = 0;                                                 //결과초기화
+            int result = 0;                                                 //결과를 초기화
 
             for (int i = 0; i < 8; i++)                                     //1픽셀은 8비트
             {
-                result = result * 2 + n % 2;                                //result값을 숫자로 계산 높은자리의 비트부터 구할수있다.
+                result = result * 2 + n % 2;                                //각각의 추출된 수를 높은자리순으로 더한다.
 
-                n /= 2;                                                     //8비트의 문자를 계산하는데 n을 2로 나누면 다음 비트를 구할수있다.
+                n /= 2;                                                     //8비트의 문자를 계산하는데 n을 2로 나누면 다음 비트를 구할수있다.(나머지 버림)
             }
 
             return result;
