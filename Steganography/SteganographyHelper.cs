@@ -15,37 +15,37 @@ namespace Steganography
         {
             State state = State.Hiding;
 
-            int charIndex = 0;
+            int charIndex = 0;	// refers the length of the text
 
-            int charValue = 0;
+            int charValue = 0;  // a character of text
 
             long pixelElementIndex = 0; // mod 3 result will 0:red 1:green 2:blue
 
             int zeros = 0;
 
-            int R = 0, G = 0, B = 0;
-
+            int R = 0, G = 0, B = 0;  // A pixel's LSBs of each R, G, B
+	    // loop will be end at the end of storing all the characters of text
             for (int i = 0; i < bmp.Height; i++)
             {
                 for (int j = 0; j < bmp.Width; j++)
                 {
-                    Color pixel = bmp.GetPixel(j, i);
-		   // Set the LSB of R G B to 0
+                    Color pixel = bmp.GetPixel(j, i); // Get a pixel value
+		   // Set the LSBs of each R G B to 0
                     R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
 		    // loop 3 times for R G B each
                     for (int n = 0; n < 3; n++)
-                    {	// pixel 8th bit
+                    {	// A character is 8 bit, so when 8 bit values are stored,
                         if (pixelElementIndex % 8 == 0)
-                        {   // all 8bit is set
+                        {   // If all characters are set in pixels
                             if (state == State.Filling_With_Zeros && zeros == 8)
-                            {	// 8bit set but and remained bit is exist
+                            {	// 8bit set but and remained G or B LSB is exist
                                 if ((pixelElementIndex - 1) % 3 < 2)
-				{   // set pixel color to value of R, G, B(modified)
+				{   // set pixel value because the cases G and B blow don't set the modified value of pixel
                                     bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 }
-				// if there's no remained, return bmp
+				// if the character bits are 8's multiple
                                 return bmp;
                             }
 			    // all text are embedded
@@ -89,7 +89,10 @@ namespace Steganography
                         }
 			// increase pixel index
                         pixelElementIndex++;
-			// set state
+			/* state set to Filling_with_zeros, but this condition means
+			all the characters are stored but remained pixels are still
+			exist so zeros will be increased to 8 to handle remained pixel
+			*/
                         if (state == State.Filling_With_Zeros)
                         {
                             zeros++; // zeros will increase to 8
@@ -117,24 +120,24 @@ namespace Steganography
                     {
                         switch (colorUnitIndex % 3)
                         {
-                            case 0: // Extract character from R
+                            case 0: // Extract a bit from R
                                 {
                                     charValue = charValue * 2 + pixel.R % 2;
                                 } break;
-                            case 1: // Extract character from G
+                            case 1: // Extract a bit from G
                                 {
                                     charValue = charValue * 2 + pixel.G % 2;
                                 } break;
-                            case 2: // Extract character from B
+                            case 2: // Extract a bit from B
                                 {
                                     charValue = charValue * 2 + pixel.B % 2;
                                 } break;
                         }
 			// get next pixel
                         colorUnitIndex++;
-
+			// if 8 bit extracted
                         if (colorUnitIndex % 8 == 0)
-                        {
+                        {   // 8 bit will be translated to a character
                             charValue = reverseBits(charValue);
 
                             if (charValue == 0)
