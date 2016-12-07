@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing; // Steganography 네임스페이스 선언.
 
-namespace Steganography 
+namespace Steganography
 {
     class SteganographyHelper
     {
@@ -33,7 +33,7 @@ namespace Steganography
                     Color pixel = bmp.GetPixel(j, i); // j,i 픽셀을 받아온다.
 
                     /* RGB의 마지막 비트를 0으로 세팅 */
-                    R = pixel.R - pixel.R % 2; 
+                    R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
 
@@ -71,7 +71,8 @@ namespace Steganography
                                         R += charValue % 2; // R의 마지막 비트에 문자열 저장.
                                         charValue /= 2; // charValue 를 2로 나누고 저장한다. 다음 비트로 시프트.
                                     }
-                                } break;
+                                }
+                                break;
                             case 1:
                                 {
                                     if (state == State.Hiding)
@@ -80,7 +81,8 @@ namespace Steganography
 
                                         charValue /= 2; // charValue 를 2로 나누고 저장한다. 시프트
                                     }
-                                } break;
+                                }
+                                break;
                             case 2:
                                 {
                                     if (state == State.Hiding)
@@ -91,7 +93,8 @@ namespace Steganography
                                     }
 
                                     bmp.SetPixel(j, i, Color.FromArgb(R, G, B)); // RGB를 픽셀에 세팅한다.
-                                } break;
+                                }
+                                break;
                         }
 
                         pixelElementIndex++; // pixelElementIndex를 1 증가시킨다.
@@ -127,15 +130,18 @@ namespace Steganography
                             case 0: // R
                                 {
                                     charValue = charValue * 2 + pixel.R % 2; // charValue에 2를 곱하고 픽셀의 R의 비트를 charValue에 넣는다. 
-                                } break;
+                                }
+                                break;
                             case 1: // G
                                 {
                                     charValue = charValue * 2 + pixel.G % 2; // charValue에 2를 곱하고 픽셀의 R의 비트를 charValue에 넣는다.
-                                } break;
+                                }
+                                break;
                             case 2: // B
                                 {
                                     charValue = charValue * 2 + pixel.B % 2; // charValue에 2를 곱하고 픽셀의 R의 비트를 charValue에 넣는다.
-                                } break;
+                                }
+                                break;
                         }
 
                         colorUnitIndex++; // 인덱스를 1 증가시킨다.
@@ -161,7 +167,7 @@ namespace Steganography
 
         public static int reverseBits(int n) // 비트를 거꾸로 바꿔주는 함수.
         {
-            int result = 0; 
+            int result = 0;
 
             for (int i = 0; i < 8; i++)
             {
@@ -174,3 +180,5 @@ namespace Steganography
         }
     }
 }
+
+
