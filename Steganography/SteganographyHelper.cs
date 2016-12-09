@@ -35,13 +35,13 @@ namespace Steganography
                     G = pixel.G - pixel.G % 2;         //RGB의 각 LSB 비트를 0으로 만든다
                     B = pixel.B - pixel.B % 2;
 
-                    for (int n = 0; n < 3; n++)   //3회 돌면서 0으로 세팅한 RGB 비트
+                    for (int n = 0; n < 3; n++)   //(RGB:3회) 반복문 3회 시행
                     {
                         if (pixelElementIndex % 8 == 0)  //가져온 한 문자(8bit)를 다 읽었을 경우 
                         {
                             if (state == State.Filling_With_Zeros && zeros == 8)  //state가 Filling_With_Zeros이고 zeros가 8인경우(RGB의 B까지 0으로 채워진 경우)
                             {
-                                if ((pixelElementIndex - 1) % 3 < 2)  //B가 아닐 경우(switch문에서 두번째 case)
+                                if ((pixelElementIndex - 1) % 3 < 2)  //마지막이 B가 아닐 경우(switch문에서 두번째 case)
                                 {
                                     bmp.SetPixel(j, i, Color.FromArgb(R, G, B));//j,i 위치로 픽셀을 세팅
                                 }
@@ -86,7 +86,7 @@ namespace Steganography
                                         charValue /= 2;    //다음 비트로 이동한다
                                     }
 
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));   //j,i 위치에 RGB 값을 세팅한다
                                 } break;
                         }
 
@@ -112,10 +112,10 @@ namespace Steganography
 
             for (int i = 0; i < bmp.Height; i++)  
             {
-                for (int j = 0; j < bmp.Width; j++)    //이미지의 높이와 넓이 만큼 반복
+                for (int j = 0; j < bmp.Width; j++)    //input 이미지의 높이와 넓이 만큼 반복
                 {
                     Color pixel = bmp.GetPixel(j, i);   //j,i 위치의 픽셀을 가져온다
-                    for (int n = 0; n < 3; n++)   //각 픽셀당 RGB에 대해 연산
+                    for (int n = 0; n < 3; n++)   //각 픽셀당 RGB에 대해 3회 반복
                     {
                         switch (colorUnitIndex % 3)  //R,G,B에 대해 switch연산
                         {
@@ -135,11 +135,11 @@ namespace Steganography
 
                         colorUnitIndex++;//인덱스 증가
 
-                        if (colorUnitIndex % 8 == 0)  //한 문자를 다읽었ㅇ르 경우
+                        if (colorUnitIndex % 8 == 0)  //한 문자를 다읽었을 경우
                         {
                             charValue = reverseBits(charValue);  //위에서 나온 charValue를 역순으로 저장
 
-                            if (charValue == 0)   //0일경우
+                            if (charValue == 0)   //0일경우 (더 읽어올 것이 없을 경우)
                             {
                                 return extractedText;   //추출된 메시지를 반환
                             }
