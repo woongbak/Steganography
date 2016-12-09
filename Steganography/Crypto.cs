@@ -126,6 +126,11 @@ namespace Steganography
             return plaintext;
         }
 
+        /// <summary>
+        /// Read byte array
+        /// </summary>
+        /// <param name="s">The stream to read.</param>
+        /// <returns></returns>
         private static byte[] ReadByteArray(Stream s)
         {
             byte[] rawLength = new byte[sizeof(int)];
