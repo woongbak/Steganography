@@ -38,7 +38,7 @@ namespace Steganography
                     G = pixel.G - pixel.G % 2; 
                     B = pixel.B - pixel.B % 2;
 
-                    /* 8비트 저장을 위해 3회 반복(R,G,B,R,G,B,R,G) */
+                    /* RGB 저장을 위해 3회 반복 */
                     for (int n = 0; n < 3; n++)
                     {
                         /* 픽셀인덱스 mod 8 값이 0이면 */
@@ -137,7 +137,7 @@ namespace Steganography
                 {
                     /* 픽셀 얻어옴 */
                     Color pixel = bmp.GetPixel(j, i);
-                    /* 8비트 분석을 위해 3회 반복(R,G,B,R,G,B,R,G) */
+                    /* RGB 분석을 위해 3회 반복 */
                     for (int n = 0; n < 3; n++)
                     {
                         /* 인덱스 mod 3 값을 활용해 switch */
