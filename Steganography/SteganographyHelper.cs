@@ -11,6 +11,12 @@ namespace Steganography
             Filling_With_Zeros
         };
 
+        /// <summary>
+        /// Embed text to image.
+        /// </summary>
+        /// <param name="text">The text to embed</param>
+        /// <param name="bmp">The image</param>
+        /// <returns></returns>
         public static Bitmap embedText(string text, Bitmap bmp)
         {
             State state = State.Hiding;
@@ -25,16 +31,20 @@ namespace Steganography
 
             int R = 0, G = 0, B = 0;
 
+            // 이미지의 가로를 먼저 작성한다.
             for (int i = 0; i < bmp.Height; i++)
             {
                 for (int j = 0; j < bmp.Width; j++)
                 {
                     Color pixel = bmp.GetPixel(j, i);
 
+                    // LSB를 제거한다. 
+
                     R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
 
+                    // RGS -> 3개
                     for (int n = 0; n < 3; n++)
                     {
                         if (pixelElementIndex % 8 == 0)
@@ -60,7 +70,7 @@ namespace Steganography
                         }
 
                         switch (pixelElementIndex % 3)
-                        {
+                        { // 0: Red, 1: Green, 2: Blue
                             case 0:
                                 {
                                     if (state == State.Hiding)
@@ -104,6 +114,11 @@ namespace Steganography
             return bmp;
         }
 
+        /// <summary>
+        /// Extract text
+        /// </summary>
+        /// <param name="bmp">The image to extract.</param>
+        /// <returns>Extracted string.</returns>
         public static string extractText(Bitmap bmp)
         {
             int colorUnitIndex = 0;
@@ -119,7 +134,7 @@ namespace Steganography
                     for (int n = 0; n < 3; n++)
                     {
                         switch (colorUnitIndex % 3)
-                        {
+                        { // 0: Red, 1: Green, 2: Blue
                             case 0:
                                 {
                                     charValue = charValue * 2 + pixel.R % 2;
@@ -155,6 +170,11 @@ namespace Steganography
             return extractedText;
         }
 
+        /// <summary>
+        /// Reverse bit
+        /// </summary>
+        /// <param name="n">The intager to reverse.</param>
+        /// <returns>Reversed string.</returns>
         public static int reverseBits(int n)
         {
             int result = 0;
