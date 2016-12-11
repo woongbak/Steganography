@@ -37,7 +37,7 @@ namespace Steganography
 
                     for (int n = 0; n < 3; n++)         // 한픽셀당 밑에 과정들 3번씩 반복
                     {
-                        if (pixelElementIndex % 8 == 0)     // pixelElementIndex가 8의 배수일때마다  => 이유: char 형 변수가 크기가 1바이트 이기 때문에 (2^8-1 개 가지수)
+                        if (pixelElementIndex % 8 == 0)     // pixelElementIndex가 8의 배수일때마다  => 이유: char 형 변수가 크기가 1바이트 이기 때문에 (255 개 가짓수), 한글로 하면 안나옴...
                         {
                             if (state == State.Filling_With_Zeros && zeros == 8)        //  현 상태가 Filling_With_Zeros 상태이지만 zero 가 8이 되었다면(state == State.Filling_With_Zeros 가 8번 채워졌다면),
                             {
