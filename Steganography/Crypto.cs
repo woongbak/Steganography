@@ -5,7 +5,7 @@ using System.IO;
 
 // resource:
 // https://github.com/Digiex/MCLauncher.NET/blob/master/MCLauncher.net/Crypto.cs
-
+//정보보호학과 16011123 이정훈 
 namespace Steganography
 {
     public class Crypto
