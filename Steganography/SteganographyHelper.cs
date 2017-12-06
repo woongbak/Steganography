@@ -21,7 +21,7 @@ namespace Steganography
 
             int charValue = 0;  //text의 문자의 정수 값
 
-            long pixelElementIndex = 0; 
+            long pixelElementIndex = 0; //하나의 문자씩 연산하기 위한 변수
 
             int zeros = 0;
 
@@ -94,7 +94,7 @@ namespace Steganography
                                 } break;
                         }
 
-                        pixelElementIndex++; //픽셀안의 RGB에 대한 인덱스를 1증가
+                        pixelElementIndex++; //1증가
 
                         if (state == State.Filling_With_Zeros) //모두 숨겼을 때 
                         {
