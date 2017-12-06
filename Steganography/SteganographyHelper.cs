@@ -41,11 +41,11 @@ namespace Steganography
                     {
                         if (pixelElementIndex % 8 == 0) //처음 시작 또는 하나의 문자(8bits)가 처리됐을 때
                         {
-                            if (state == State.Filling_With_Zeros && zeros == 8) //모든 문자를 숨겨쓸 때 
+                            if (state == State.Filling_With_Zeros && zeros == 8) //모든 문자를 숨겼을 때 
                             {
                                 if ((pixelElementIndex - 1) % 3 < 2) 
                                 {
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B)); //픽셀(j,i)의 마지막 비트를 0으로 
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B)); //숨긴 문자가 끝난 후 8비트를 0으로 세팅
                                 }
 
                                 return bmp; //텍스트를 숨긴 사진 반환
