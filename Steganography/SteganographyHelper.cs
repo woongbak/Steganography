@@ -12,7 +12,7 @@ namespace Steganography
         public enum State
         {
             Hiding, // 숨김 모드
-            Filling_With_Zeros
+            Filling_With_Zeros // 숨김 완료 모드
         };
 
         // embedText 메소드 구현 (text 숨기는 메소드)
@@ -26,7 +26,7 @@ namespace Steganography
 
             long pixelElementIndex = 0; // 픽셀 인덱스 값
 
-            int zeros = 0; // 비트 계산용
+            int zeros = 0; // 마지막 숨김 완료 체크 비트 계산용
 
             int R = 0, G = 0, B = 0; // R, G, B 값
 
@@ -46,7 +46,7 @@ namespace Steganography
                     {
                         if (pixelElementIndex % 8 == 0) // 픽셀 인덱스 값의 나머지가 8인 경우 (글자의 비트가 남아있는 경우)
                         {
-                            if (state == State.Filling_With_Zeros && zeros == 8) // 숨김 완료 상태이고 zeros가 8인 경우
+                            if (state == State.Filling_With_Zeros && zeros == 8) // 숨김 완료 상태이고 마지막 8 비트가 모두 0인 경우
                             {
                                 if ((pixelElementIndex - 1) % 3 < 2) // 만약 변경해야할 RGB 값이 있는 경우
                                 {
@@ -103,7 +103,7 @@ namespace Steganography
 
                         if (state == State.Filling_With_Zeros) // 만약 숨김 완료 상태이면
                         {
-                            zeros++; // zeros를 1 증가시킴
+                            zeros++; // 비트 0의 개수를 1개 증가시킴
                         }
                     }
                 }
