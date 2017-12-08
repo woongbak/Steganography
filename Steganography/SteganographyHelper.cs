@@ -10,7 +10,7 @@ namespace Steganography
             Hiding,
             Filling_With_Zeros
         };
-
+        //텍스트를 숨기기 위한 메소드
         public static Bitmap embedText(string text, Bitmap bmp)
         {
             State state = State.Hiding;
@@ -25,6 +25,7 @@ namespace Steganography
 
             int R = 0, G = 0, B = 0;
 
+            //각 이미지의 픽셀을 돌며 RGB 값을 얻는다.
             for (int i = 0; i < bmp.Height; i++)
             {
                 for (int j = 0; j < bmp.Width; j++)
@@ -37,6 +38,7 @@ namespace Steganography
 
                     for (int n = 0; n < 3; n++)
                     {
+                        // 각 RGB의 LSB로 간다.
                         if (pixelElementIndex % 8 == 0)
                         {
                             if (state == State.Filling_With_Zeros && zeros == 8)
@@ -48,7 +50,7 @@ namespace Steganography
 
                                 return bmp;
                             }
-
+                            // LSB를 0으로 세팅
                             if (charIndex >= text.Length)
                             {
                                 state = State.Filling_With_Zeros;
@@ -59,6 +61,7 @@ namespace Steganography
                             }
                         }
 
+                        //숨길 문자들을 정수로 바꾼뒤, 픽셀에 인코딩한다.
                         switch (pixelElementIndex % 3)
                         {
                             case 0:
@@ -90,7 +93,7 @@ namespace Steganography
                                     bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 } break;
                         }
-
+                        // 다음 문자로 이동
                         pixelElementIndex++;
 
                         if (state == State.Filling_With_Zeros)
@@ -111,6 +114,7 @@ namespace Steganography
 
             string extractedText = String.Empty;
 
+            //픽셀을 돌려 RGB값 얻음
             for (int i = 0; i < bmp.Height; i++)
             {
                 for (int j = 0; j < bmp.Width; j++)
@@ -118,6 +122,7 @@ namespace Steganography
                     Color pixel = bmp.GetPixel(j, i);
                     for (int n = 0; n < 3; n++)
                     {
+                        //RGB값 Char로 변환
                         switch (colorUnitIndex % 3)
                         {
                             case 0:
@@ -140,6 +145,7 @@ namespace Steganography
                         {
                             charValue = reverseBits(charValue);
 
+                            //문자를 다 읽어내면 추출함
                             if (charValue == 0)
                             {
                                 return extractedText;
