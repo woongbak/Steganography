@@ -39,11 +39,11 @@ namespace Steganography
                     {
                         if (pixelElementIndex % 8 == 0) // char는 8비트 정수형이다. 한 문자의 비트를 모두 RGB에 세팅하였을 경우
                         {
-                            if (state == State.Filling_With_Zeros && zeros == 8)    // 텍스트를 다 채운 후 세 번째 픽셀의 B 비트를 가리킬 때
+                            if (state == State.Filling_With_Zeros && zeros == 8)    // 텍스트를 다 채운 후 8비트를 더 이동해 문자열의 크기보다 1만큼 더 이동했다면
                             {
                                 if ((pixelElementIndex - 1) % 3 < 2)
                                 {
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));    // RGB 값을 세팅
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));    // RGB 값을 0으로 세팅
                                 }
 
                                 return bmp; // bmp를 리턴한다
