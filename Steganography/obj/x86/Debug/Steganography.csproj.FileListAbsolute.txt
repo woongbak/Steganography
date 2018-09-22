@@ -1,0 +1,10 @@
+D:\stegano project\Steganography\Steganography\bin\Debug\Steganography.exe.config
+D:\stegano project\Steganography\Steganography\bin\Debug\Steganography.exe
+D:\stegano project\Steganography\Steganography\bin\Debug\Steganography.pdb
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.csprojAssemblyReference.cache
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.Steganography.resources
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.Properties.Resources.resources
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.csproj.GenerateResource.cache
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.csproj.CoreCompileInputs.cache
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.exe
+D:\stegano project\Steganography\Steganography\obj\x86\Debug\Steganography.pdb
