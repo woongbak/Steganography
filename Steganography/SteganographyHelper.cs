@@ -31,13 +31,13 @@ namespace Steganography
                 {
                     Color pixel = bmp.GetPixel(j, i);
 
-                    R = pixel.R - pixel.R % 2;
-                    G = pixel.G - pixel.G % 2;
-                    B = pixel.B - pixel.B % 2;
+                    R = pixel.R - pixel.R % 0b10000;
+                    G = pixel.G - pixel.G % 0b10000;
+                    B = pixel.B - pixel.B % 0b10000;
 
                     for (int n = 0; n < 3; n++)
                     {
-                        if (pixelElementIndex % 8 == 0)
+                        if (pixelElementIndex % 2 == 0)
                         {
                             if (state == State.Filling_With_Zeros && zeros == 8)
                             {
@@ -65,26 +65,26 @@ namespace Steganography
                                 {
                                     if (state == State.Hiding)
                                     {
-                                        R += charValue % 2;
-                                        charValue /= 2;
+                                        R += charValue % 0b10000;
+                                        charValue /= 0b10000;
                                     }
                                 } break;
                             case 1:
                                 {
                                     if (state == State.Hiding)
                                     {
-                                        G += charValue % 2;
+                                        G += charValue % 0b10000;
 
-                                        charValue /= 2;
+                                        charValue /= 0b10000;
                                     }
                                 } break;
                             case 2:
                                 {
                                     if (state == State.Hiding)
                                     {
-                                        B += charValue % 2;
+                                        B += charValue % 0b10000;
 
-                                        charValue /= 2;
+                                        charValue /= 0b10000;
                                     }
 
                                     bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
@@ -122,23 +122,24 @@ namespace Steganography
                         {
                             case 0:
                                 {
-                                    charValue = charValue * 2 + pixel.R % 2;
+                                    charValue = charValue * 0b10000 + pixel.R % 0b10000;
                                 } break;
                             case 1:
                                 {
-                                    charValue = charValue * 2 + pixel.G % 2;
+                                    charValue = charValue * 0b10000 + pixel.G % 0b10000;
                                 } break;
                             case 2:
                                 {
-                                    charValue = charValue * 2 + pixel.B % 2;
+                                    charValue = charValue * 0b10000 + pixel.B % 0b10000;
                                 } break;
                         }
 
                         colorUnitIndex++;
 
-                        if (colorUnitIndex % 8 == 0)
+                        if (colorUnitIndex % 2 == 0)
                         {
-                            charValue = reverseBits(charValue);
+                            // charValue = reverseBits(charValue);
+                            charValue = reverseBits4(charValue);
 
                             if (charValue == 0)
                             {
@@ -147,6 +148,8 @@ namespace Steganography
                             char c = (char)charValue;
 
                             extractedText += c.ToString();
+
+                            charValue = 0;
                         }
                     }
                 }
@@ -164,6 +167,19 @@ namespace Steganography
                 result = result * 2 + n % 2;
 
                 n /= 2;
+            }
+
+            return result;
+        }
+        public static int reverseBits4(int n)
+        {
+            int result = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                result = result * 0b10000 + n % 0b10000;
+
+                n /= 0b10000;
             }
 
             return result;
