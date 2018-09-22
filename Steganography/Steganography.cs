@@ -131,5 +131,16 @@ namespace Steganography
             }
         }
 
+        private void dataTextBox_KeyDown(object sender, EventArgs e)
+        {
+            if (e.Control)
+            {
+                if (e.KeyCode == Keys.A)
+                {
+                    this.dataTextBox.Focus();
+                    this.dataTextBox.SelectAll();
+                }
+            }
+        }
     }
 }
