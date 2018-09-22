@@ -7,43 +7,43 @@ namespace Steganography
     {
         public enum State
         {
-            Hiding,
-            Filling_With_Zeros
+            Hiding, //이친구는 0이다
+            Filling_With_Zeros //이친구는 1이다
         };
 
         public static Bitmap embedText(string text, Bitmap bmp)
         {
-            State state = State.Hiding;
+            State state = State.Hiding; //state에 0을 저장한다
 
-            int charIndex = 0;
+            int charIndex = 0; //변수1
 
-            int charValue = 0;
+            int charValue = 0; //변수2
 
-            long pixelElementIndex = 0;
+            long pixelElementIndex = 0; // 변수3
 
-            int zeros = 0;
+            int zeros = 0; //변수4
 
-            int R = 0, G = 0, B = 0;
+            int R = 0, G = 0, B = 0; //변수 5,6,7
 
-            for (int i = 0; i < bmp.Height; i++)
+            for (int i = 0; i < bmp.Height; i++) //bmp높이 1씩 올리기
             {
-                for (int j = 0; j < bmp.Width; j++)
+                for (int j = 0; j < bmp.Width; j++) //bmp 옆으로 1픽셀씩 옮김
                 {
-                    Color pixel = bmp.GetPixel(j, i);
+                    Color pixel = bmp.GetPixel(j, i); //그 비트맵에 저장된 색 가져오기
 
-                    R = pixel.R - pixel.R % 2;
-                    G = pixel.G - pixel.G % 2;
-                    B = pixel.B - pixel.B % 2;
+                    R = pixel.R - pixel.R % 2; //그 픽셀의 R값에서 그 R을 2로 나눈 나머지로 뺀다
+                    G = pixel.G - pixel.G % 2; //그 픽셀의 G값에서 그 G를 2로 나눈 나머지로 뺀다
+                    B = pixel.B - pixel.B % 2; //그 픽셀의 B값에서 그 B를 2로 나눈 나머지로 뺀다
 
-                    for (int n = 0; n < 3; n++)
+                    for (int n = 0; n < 3; n++) //총 3번돌린다
                     {
-                        if (pixelElementIndex % 8 == 0)
+                        if (pixelElementIndex % 8 == 0) //이 변수가 8로 나눠 0일때
                         {
-                            if (state == State.Filling_With_Zeros && zeros == 8)
+                            if (state == State.Filling_With_Zeros && zeros == 8) //FWZ가 0이고 zeros가 8일때
                             {
-                                if ((pixelElementIndex - 1) % 3 < 2)
+                                if ((pixelElementIndex - 1) % 3 < 2) //PEI에서 1을 뺀것에 3으로 나눈 나머지가 2보다 작으면
                                 {
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B)); //(x,y)픽셀에 위에 RGB값으로 색칠한다
                                 }
 
                                 return bmp;
