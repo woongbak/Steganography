@@ -72,6 +72,7 @@
             this.dataTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataTextBox.Size = new System.Drawing.Size(436, 106);
             this.dataTextBox.TabIndex = 2;
+            this.dataTextBox.TextChanged += new System.EventHandler(this.dataTextBox_TextChanged);
             // 
             // extractButton
             // 
