@@ -68,7 +68,7 @@ namespace Steganography //Steganography namespace 정의
 								charValue = text[charIndex++];  //숨길 대상의 문자를 저장하고 charIndex(숨긴 문자 갯수) 1 증가
 							}
 						}
-						//pixelElementIndex % 3으로 분류
+						//pixelElementIndex % 3에 따라 수행
 						switch (pixelElementIndex % 3)
 						{
 						case 0: //0일때 : R 
@@ -135,7 +135,8 @@ namespace Steganography //Steganography namespace 정의
 					Color pixel = bmp.GetPixel(j, i); //가로 세로 위치를 이용해 색 정보(픽셀)를 리턴
 					for (int n = 0; n < 3; n++) //3번 반복
 					{
-						switch (colorUnitIndex % 3) //colorUnitIndex % 3 값에 따라 수행
+						//colorUnitIndex % 3 값에 따라 수행
+						switch (colorUnitIndex % 3) 
 						{
 						case 0: //0일때 : R
 						{
