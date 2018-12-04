@@ -68,8 +68,8 @@ namespace Steganography //Steganography namespace 정의
 								charValue = text[charIndex++];  //숨길 대상의 문자를 저장하고 charIndex(숨긴 문자 갯수) 1 증가
 							}
 						}
-
-						switch (pixelElementIndex % 3) //pixelElementIndex%3으로 분류
+						//pixelElementIndex % 3으로 분류
+						switch (pixelElementIndex % 3)
 						{
 						case 0: //0일때 : R 
 						{
