@@ -69,7 +69,7 @@ namespace Steganography //Steganography namespace 정의
 							}
 						}
 
-						switch (pixelElementIndex % 3) //pixelElementIndex % 3 으로 분류 (R,G,B)
+						switch (pixelElementIndex % 3) //pixelElementIndex%3으로 분류
 						{
 						case 0: //0일때 : R 
 						{
