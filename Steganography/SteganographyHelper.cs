@@ -136,7 +136,7 @@ namespace Steganography //Steganography namespace 정의
 					for (int n = 0; n < 3; n++) //3번 반복
 					{
 						switch (colorUnitIndex % 3) //colorUnitIndex % 3 값에 따라 수행
-													//픽셀 값으로 문자값을 해독
+									    //픽셀 값으로 문자값을 해독
 						{
 						case 0: //0일때 : R
 						{
