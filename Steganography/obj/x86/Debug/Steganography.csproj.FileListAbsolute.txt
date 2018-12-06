@@ -1,0 +1,10 @@
+C:\manageGit\Steganography\Steganography\bin\Debug\Steganography.exe.config
+C:\manageGit\Steganography\Steganography\bin\Debug\Steganography.exe
+C:\manageGit\Steganography\Steganography\bin\Debug\Steganography.pdb
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.csprojResolveAssemblyReference.cache
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.Steganography.resources
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.Properties.Resources.resources
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.csproj.GenerateResource.cache
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.csproj.CoreCompileInputs.cache
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.exe
+C:\manageGit\Steganography\Steganography\obj\x86\Debug\Steganography.pdb
