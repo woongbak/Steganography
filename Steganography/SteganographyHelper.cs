@@ -186,7 +186,6 @@ namespace Steganography
             for (int i = 0; i < 8; i++)
             {
                 result = result * 2 + n % 2;
-
                 n /= 2;
             }
 
