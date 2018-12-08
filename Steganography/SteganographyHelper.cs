@@ -151,7 +151,7 @@ namespace Steganography
 
                         if (colorUnitIndex % 8 == 0)    // 색인덱스을 8로 나눈 나머지가 0이면
                         {
-                            charValue = reverseBits(charValue);
+                            charValue = reverseBits(charValue); // 비트를 뒤집어준다.
 
                             if (charValue == 0) // charValue의 값이 0이면
                             {
@@ -168,7 +168,7 @@ namespace Steganography
             return extractedText;   // 모든 반복문이 종료되면 extractedText를 반환
         }
 
-        public static int reverseBits(int n)
+        public static int reverseBits(int n) //비트를 뒤집어주는 함수, 비트를 뒤집어 숨겨진 데이터에 무엇이 저장되어 있는지 확인한다.
         {
             int result = 0;
 
