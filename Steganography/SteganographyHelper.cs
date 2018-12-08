@@ -10,7 +10,8 @@ namespace Steganography
             Hiding,
             Filling_With_Zeros
         };
-
+        
+        // 입력된 텍스트를 이미지에 숨기는 함수 생성
         public static Bitmap embedText(string text, Bitmap bmp)
         {
             State state = State.Hiding;
@@ -25,12 +26,14 @@ namespace Steganography
 
             int R = 0, G = 0, B = 0;
 
+            // 전체 BMP의 영역에 대하여
             for (int i = 0; i < bmp.Height; i++)
             {
                 for (int j = 0; j < bmp.Width; j++)
                 {
+                    // 각각의 픽셀을 얻음
                     Color pixel = bmp.GetPixel(j, i);
-
+                    // 픽셀의 RGB 값이 홀수면 최좌측 비트를 0으로 바꾸고 짝수면 그대로 
                     R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
