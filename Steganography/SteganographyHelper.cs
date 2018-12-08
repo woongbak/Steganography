@@ -25,19 +25,19 @@ namespace Steganography
 
             int R = 0, G = 0, B = 0;
 
-            for (int i = 0; i < bmp.Height; i++)
+            for (int i = 0; i < bmp.Height; i++)	//이미지의 픽셀을 하나씩 도는 반복문
             {
                 for (int j = 0; j < bmp.Width; j++)
                 {
                     Color pixel = bmp.GetPixel(j, i);
 
-                    R = pixel.R - pixel.R % 2;
+                    R = pixel.R - pixel.R % 2;	//한 픽셀에 방문할 때마다 RGB의 LSB 값을 0으로 세팅
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
 
                     for (int n = 0; n < 3; n++)
                     {
-                        if (pixelElementIndex % 8 == 0)
+                        if (pixelElementIndex % 8 == 0)	//세팅한 R, G, B의 개수가 0이나 8의 배수가 될 때
                         {
                             if (state == State.Filling_With_Zeros && zeros == 8)
                             {
@@ -49,19 +49,19 @@ namespace Steganography
                                 return bmp;
                             }
 
-                            if (charIndex >= text.Length)
+                            if (charIndex >= text.Length)	//데이터를 모두 읽었다면
                             {
-                                state = State.Filling_With_Zeros;
+                                state = State.Filling_With_Zeros;	//끝이라는 표시로 다음의 8비트를 모두 0으로 세팅
                             }
-                            else
+                            else	//데이터의 문자 하나를 읽어와 정수값으로 변환
                             {
                                 charValue = text[charIndex++];
                             }
                         }
 
-                        switch (pixelElementIndex % 3)
+                        switch (pixelElementIndex % 3)	//하나의 문자가 8비트이므로
                         {
-                            case 0:
+                            case 0:	//각 RGB의 0으로 세팅해둔 LSB 값에 문자 비트 하나씩 삽입
                                 {
                                     if (state == State.Hiding)
                                     {
